@@ -2,15 +2,13 @@ const Actor = require('../models/Actor');
 
 const router = require('express').Router();
 
-router.get("/", async(req, res) => {
-    const actor = await Actor.findAll();
-    res.json(actor);
+router.get("/", (req, res) => {
+    Actor.findAll().then(result => res.json(result));
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", (req, res) => {
     const id = req.params.id;
-    const actor = await Actor.findByPk(id)
-    res.json(actor);
+    Actor.findByPk(id).then(result => res.json(result));
 })
 
 module.exports = router;

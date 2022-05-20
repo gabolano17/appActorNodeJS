@@ -5,17 +5,9 @@ const db = require('./database/db');
 const app = express();
 const port = process.env.PORT || 3000;
 
-(async ()=> {
-
-    try {
-        await db.authenticate();
-        await db.sync()
-        console.log("Conexion a la BD exitosa!!!")
-    } catch (err) {
-        throw new Error(err);
-    }
-
-})()
+db.sync().then(() => {
+    console.log('Conexion a la BD Exitosa!!')
+}).catch(err => console.error('Error', err));
 
 //MIDDLEWARE
 app.use(cors())//Habilita otras app para hacer solicitudes a este servidor
